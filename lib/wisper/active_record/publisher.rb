@@ -20,6 +20,7 @@ module Wisper
 
       def after_validation_broadcast
         action = new_record? ? 'create' : 'update'
+        return unless broadcast_model_name_key
         broadcast("#{action}_#{broadcast_model_name_key}_failed", self) unless errors.empty?
       end
 
